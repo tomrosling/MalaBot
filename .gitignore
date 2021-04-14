@@ -149,3 +149,6 @@ $RECYCLE.BIN/
 
 # VirtualEnvs
 /venv/
+
+# Local Python env
+__pycache__/
