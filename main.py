@@ -2,11 +2,14 @@ import os
 import discord
 from dotenv import load_dotenv
 from thesaurus import get_synonym
+from tts import text_to_mp3
+from io import BytesIO
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 text_channel = None
 client = discord.Client()
+
 
 @client.event
 async def on_ready():
@@ -16,6 +19,7 @@ async def on_ready():
             global text_channel
             text_channel = c
             break
+
 
 @client.event
 async def on_voice_state_update(member, old_state, new_state):
@@ -43,7 +47,11 @@ async def on_voice_state_update(member, old_state, new_state):
 
     # Send the text-to-speech message.
     if message:
-        await text_channel.send(message, tts = True, delete_after = 10)
+        await text_channel.send(message, tts=True, delete_after=10)
+        await text_channel.send(
+            file=discord.File(fp=BytesIO(text_to_mp3(message)), filename="test.mp3"),
+            delete_after=10
+        )
 
 
 client.run(TOKEN)
