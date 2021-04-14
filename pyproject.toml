@@ -8,6 +8,7 @@ authors = ["Your Name <you@example.com>"]
 python = "^3.8"
 "discord.py" = "^1.7.1"
 python-dotenv = "^0.17.0"
+google-cloud-texttospeech = "^2.3.0"
 
 [tool.poetry.dev-dependencies]
 
