@@ -28,6 +28,8 @@ async def on_voice_state_update(member, old_state, new_state):
 
     new_channel = new_state.channel
     old_channel = old_state.channel
+    if old_channel == new_channel:
+        return
 
     # TODO: Iterate members of the channel we joined/left?
     #users = [await client.fetch_user(<REDACTED>)]
