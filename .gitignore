@@ -142,3 +142,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Secrets
+.env
+.google-credentials
