@@ -1,6 +1,7 @@
 import os
 import discord
 from dotenv import load_dotenv
+from thesaurus import get_synonym
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -34,11 +35,11 @@ async def on_voice_state_update(member, old_state, new_state):
     message = None
     if now_in_channel:
         if was_in_channel:
-            message = f'{member.display_name} moved to {new_channel.name}.'
+            message = f'{member.display_name} {get_synonym("moved to")} {new_channel.name}.'
         else:
-            message = f'Hello {member.display_name}!'
+            message = f'{get_synonym("Hello")} {member.display_name}!'
     elif was_in_channel:
-        message = f'Goodbye {member.display_name}!'
+        message = f'{get_synonym("Goodbye")} {member.display_name}!'
 
     # Send the text-to-speech message.
     if message:
