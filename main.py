@@ -1,6 +1,7 @@
 import os
 import discord
 from dotenv import load_dotenv
+from thesaurus import get_synonym
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -39,11 +40,11 @@ async def on_voice_state_update(member, old_state, new_state):
     message = None
     if new_channel:
         if old_channel:
-            message = f'{member.display_name} moved to {new_channel.name}.'
+            message = f'{member.display_name} {get_synonym('moved to')} {new_channel.name}.'
         else:
-            message = f'{member.display_name} joined {new_channel.name}.'
+            message = f'{member.display_name} {get_synonym('joined')} {new_channel.name}.'
     elif old_channel:
-        message = f'{member.display_name} left {old_channel.name}.'
+        message = f'{member.display_name} {get_synonym('left')} {old_channel.name}.'
 
     if message:
         await text_channel.send(message, tts = True, delete_after = 10)
