@@ -1,4 +1,7 @@
+from dotenv import load_dotenv
 from google.cloud import texttospeech
+
+load_dotenv()
 
 client = texttospeech.TextToSpeechClient()
 
