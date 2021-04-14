@@ -17,36 +17,30 @@ async def on_ready():
             break
 
 @client.event
-async def on_message(msg):
-    if 'malabot' in msg.content.lower():
-        await msg.reply('pong?')
-
-@client.event
 async def on_voice_state_update(member, old_state, new_state):
+    # If we failed to initialised, give up.
     if not text_channel:
         return
 
+    # Has the user moved channel?
     new_channel = new_state.channel
     old_channel = old_state.channel
     if old_channel == new_channel:
         return
 
-    # TODO: Iterate members of the channel we joined/left?
-    #users = [await client.fetch_user(<REDACTED>)]
-    #print(users)
-    #for user in users:
-    #    await user.send('hey buddy', tts = True) # Apparently tts doesn't work for PMs? :(
-
-    # Flaw: tts only seems to trigger on the active channel, for me at least
+    # Build a message based on the change. Treat 'afk' channel as if user disconnected.
+    now_in_channel = (new_channel and new_channel.name.lower() != 'afk')
+    was_in_channel = (old_channel and old_channel.name.lower() != 'afk')
     message = None
-    if new_channel:
-        if old_channel:
+    if now_in_channel:
+        if was_in_channel:
             message = f'{member.display_name} moved to {new_channel.name}.'
         else:
-            message = f'{member.display_name} joined {new_channel.name}.'
-    elif old_channel:
-        message = f'{member.display_name} left {old_channel.name}.'
+            message = f'Hello {member.display_name}!'
+    elif was_in_channel:
+        message = f'Goodbye {member.display_name}!'
 
+    # Send the text-to-speech message.
     if message:
         await text_channel.send(message, tts = True, delete_after = 10)
 
