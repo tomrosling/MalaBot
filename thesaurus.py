@@ -18,7 +18,8 @@ _words = {
         'Konnichiwa',
         'Guten Tag',
         'Olá',
-        'Goedendag'
+        'Goedendag',
+        'Annyeong'
     ],
     'Goodbye': [
         'Goodbye',
