@@ -13,7 +13,7 @@ audio_config = texttospeech.AudioConfig(
     audio_encoding=texttospeech.AudioEncoding.LINEAR16, sample_rate_hertz=96000)
 
 
-def text_to_mp3(input):
+def text_to_pcm(input):
     synthesis_input = texttospeech.SynthesisInput(text=input)
 
     response = client.synthesize_speech(input=synthesis_input,

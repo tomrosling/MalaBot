@@ -2,7 +2,7 @@ import os
 import discord
 from dotenv import load_dotenv
 from thesaurus import get_synonym
-from tts import text_to_mp3
+from tts import text_to_pcm
 from io import BytesIO
 
 load_dotenv()
@@ -90,7 +90,7 @@ async def on_voice_state_update(member, old_state, new_state):
 
     # Send the text-to-speech message, or queue it if the bot is already speaking.
     if message and voice_client:
-        audio_stream = discord.PCMAudio(BytesIO(text_to_mp3(message)))
+        audio_stream = discord.PCMAudio(BytesIO(text_to_pcm(message)))
         if voice_client.is_playing():
             message_queue.append(audio_stream)
         else:
