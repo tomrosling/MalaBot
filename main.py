@@ -61,8 +61,8 @@ async def on_ready():
 
 @client.event
 async def on_voice_state_update(member, old_state, new_state):
-    # Don't send messages about the bot itself!
-    if member == client.user:
+    # Don't send messages about ourself or any other bots!
+    if member.bot:
         return
 
     # Has the user moved channel?
