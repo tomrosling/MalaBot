@@ -2,37 +2,37 @@ import random
 
 _words = {
     'moved to': [
-        'teleported to',
-        'slinked away to',
-        'sneaked to',
-        'hopped to',
-        'ran away to'
+        (None, 'teleported to'),
+        (None, 'slinked away to'),
+        (None, 'sneaked to'),
+        (None, 'hopped to'),
+        (None, 'ran away to')
     ],
     'Hello': [
-        'Hello',
-        'Bonjour',
-        'Hola',
-        'Zdravstvuyte',
-        'Nǐn hǎo',
-        'Salve',
-        'Konnichiwa',
-        'Guten Tag',
-        'Olá',
-        'Goedendag',
-        'Annyeong'
+        (None, 'Hello'),
+        (None, 'Bonjour'),
+        (None, 'Hola'),
+        (None, 'Zdravstvuyte'),
+        (None, 'Nǐn hǎo'),
+        (None, 'Salve'),
+        (None, 'Konnichiwa'),
+        (None, 'Guten Tag'),
+        (None, 'Olá'),
+        (None, 'Goedendag'),
+        (None, 'Annyeong')
     ],
     'Goodbye': [
-        'Goodbye',
-        'Adios',
-        'Arrivederci'
-        'Au Revoir',
-        'Adeus',
-        'Auf Wiedersehen',
-        'Sayōnara',
-        'Do svidaniya',
-        'Annyeong',
-        'Slan',
-        'Tot ziens'
+        (None, 'Goodbye'),
+        (None, 'Adios'),
+        (None, 'Arrivederci)'
+        (None, 'Au Revoir'),
+        (None, 'Adeus'),
+        (None, 'Auf Wiedersehen'),
+        (None, 'Sayōnara'),
+        (None, 'Do svidaniya'),
+        (None, 'Annyeong'),
+        (None, 'Slan'),
+        (None, 'Tot ziens')
     ]
 }
 
