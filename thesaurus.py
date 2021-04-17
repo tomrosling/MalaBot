@@ -15,7 +15,7 @@ _words = {
         ('ru-RU', 'Zdravstvuyte'),
         ('zh-CN', 'Nǐn hǎo'),
         ('it-IT', 'Salve'),
-        ('jp-JP', 'Konnichiwa'),
+        ('ja-JP', 'Konnichiwa'),
         ('de-DE', 'Guten Tag'),
         ('pt-PT', 'Olá'),
         ('nl-NL', 'Goedendag'),
@@ -24,7 +24,7 @@ _words = {
     'Goodbye': [
         ('en-GB', 'Goodbye'),
         ('es-ES', 'Adios'),
-        ('it-IT', 'Arrivederci)'
+        ('it-IT', 'Arrivederci'),
         ('fr-FR', 'Au Revoir'),
         ('pt-PT', 'Até logo'),
         ('de-DE', 'Auf Wiedersehen'),
