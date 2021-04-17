@@ -31,7 +31,7 @@ async def update_bot_channel(guild):
         if isinstance(channel, discord.VoiceChannel):
             if channel == guild.afk_channel:
                 return 0
-            num_members = len(channel.members)
+            num_members = len(channel.voice_states)
             if voice_client and voice_client.channel == channel:
                 num_members -= 1
             return num_members
