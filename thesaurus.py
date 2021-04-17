@@ -2,37 +2,38 @@ import random
 
 _words = {
     'moved to': [
-        (None, 'teleported to'),
-        (None, 'slinked away to'),
-        (None, 'sneaked to'),
-        (None, 'hopped to'),
-        (None, 'ran away to')
+        ('en-GB', 'teleported to'),
+        ('en-GB', 'slinked away to'),
+        ('en-GB', 'sneaked to'),
+        ('en-GB', 'hopped to'),
+        ('en-GB', 'ran away to')
     ],
     'Hello': [
-        (None, 'Hello'),
-        (None, 'Bonjour'),
-        (None, 'Hola'),
-        (None, 'Zdravstvuyte'),
-        (None, 'Nǐn hǎo'),
-        (None, 'Salve'),
-        (None, 'Konnichiwa'),
-        (None, 'Guten Tag'),
-        (None, 'Olá'),
-        (None, 'Goedendag'),
-        (None, 'Annyeong')
+        ('en-GB', 'Hello'),
+        ('fr-FR', 'Bonjour'),
+        ('es-ES', 'Hola'),
+        ('ru-RU', 'Zdravstvuyte'),
+        ('zh-CN', 'Nǐn hǎo'),
+        ('it-IT', 'Salve'),
+        ('jp-JP', 'Konnichiwa'),
+        ('de-DE', 'Guten Tag'),
+        ('pt-PT', 'Olá'),
+        ('nl-NL', 'Goedendag'),
+        ('ko-KR', 'Annyeong')
     ],
     'Goodbye': [
-        (None, 'Goodbye'),
-        (None, 'Adios'),
-        (None, 'Arrivederci)'
-        (None, 'Au Revoir'),
-        (None, 'Adeus'),
-        (None, 'Auf Wiedersehen'),
-        (None, 'Sayōnara'),
-        (None, 'Do svidaniya'),
-        (None, 'Annyeong'),
-        (None, 'Slan'),
-        (None, 'Tot ziens')
+        ('en-GB', 'Goodbye'),
+        ('es-ES', 'Adios'),
+        ('it-IT', 'Arrivederci)'
+        ('fr-FR', 'Au Revoir'),
+        ('pt-PT', 'Até logo'),
+        ('de-DE', 'Auf Wiedersehen'),
+        ('jp-JP', 'Sayōnara'),
+        ('ru-RU', 'Do svidaniya'),
+        ('ko-KR', 'Annyeong'),
+        (None, 'Slan'),#Irish
+        ('nl-NL', 'Tot ziens'),
+        ('zh-CN', 'Zàijiàn')
     ]
 }
 
