@@ -5,15 +5,21 @@ load_dotenv()
 
 client = texttospeech.TextToSpeechClient()
 
-voice = texttospeech.VoiceSelectionParams(language_code="en-GB",
-                                          name="en-GB-Wavenet-F")
-
 # NOTE: Discord actually wants 48KHz stereo (for some reason). But 96KHz mono works fine for now.
 audio_config = texttospeech.AudioConfig(
     audio_encoding=texttospeech.AudioEncoding.LINEAR16, sample_rate_hertz=96000)
 
 
-def text_to_pcm(input):
+def text_to_pcm(input, lang):
+    lang = lang or 'en-GB'
+    if lang == 'en-GB':
+        voice_name = 'en-GB-Wavenet-F'
+    else:
+        voice_name = lang + '-Wavenet-A'
+
+    voice = texttospeech.VoiceSelectionParams(language_code=lang,
+                                              name=voice_name)
+
     synthesis_input = texttospeech.SynthesisInput(text=input)
 
     response = client.synthesize_speech(input=synthesis_input,

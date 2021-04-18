@@ -2,37 +2,38 @@ import random
 
 _words = {
     'moved to': [
-        'teleported to',
-        'slinked away to',
-        'sneaked to',
-        'hopped to',
-        'ran away to'
+        ('en-GB', 'teleported to'),
+        ('en-GB', 'slinked away to'),
+        ('en-GB', 'sneaked to'),
+        ('en-GB', 'hopped to'),
+        ('en-GB', 'ran away to')
     ],
     'Hello': [
-        'Hello',
-        'Bonjour',
-        'Hola',
-        'Zdravstvuyte',
-        'Nǐn hǎo',
-        'Salve',
-        'Konnichiwa',
-        'Guten Tag',
-        'Olá',
-        'Goedendag',
-        'Annyeong'
+        ('en-GB', 'Hello'),
+        ('fr-FR', 'Bonjour'),
+        ('es-ES', 'Hola'),
+        ('ru-RU', 'Zdravstvuyte'),
+        ('zh-CN', 'Nǐn hǎo'),
+        ('it-IT', 'Salve'),
+        ('ja-JP', 'Konnichiwa'),
+        ('de-DE', 'Guten Tag'),
+        ('pt-PT', 'Olá'),
+        ('nl-NL', 'Goedendag'),
+        ('ko-KR', 'Annyeong')
     ],
     'Goodbye': [
-        'Goodbye',
-        'Adios',
-        'Arrivederci'
-        'Au Revoir',
-        'Adeus',
-        'Auf Wiedersehen',
-        'Sayōnara',
-        'Do svidaniya',
-        'Annyeong',
-        'Slan',
-        'Tot ziens'
+        ('en-GB', 'Goodbye'),
+        ('es-ES', 'Adios'),
+        ('it-IT', 'Arrivederci'),
+        ('fr-FR', 'Au Revoir'),
+        ('pt-PT', 'Até logo'),
+        ('de-DE', 'Auf Wiedersehen'),
+        ('ja-JP', 'Sayōnara'),
+        ('ru-RU', 'Do svidaniya'),
+        ('ko-KR', 'Annyeong'),
+        (None, 'Slan'),#Irish
+        ('nl-NL', 'Tot ziens'),
+        ('zh-CN', 'Zàijiàn')
     ]
 }
 

@@ -71,22 +71,22 @@ async def on_voice_state_update(member, old_state, new_state):
     if old_channel == new_channel:
         return
 
-    # Check if the bot should go to the new channel.
+    # Check if the bot needs to change channel.
     guild = (old_channel and old_channel.guild) or (new_channel and new_channel.guild)
     assert(guild)
     await update_bot_channel(guild)
+    if not voice_client:
+        return
 
     # Build a message based on the change. Treat 'afk' channel as if user disconnected.
-    now_in_channel = (new_channel and new_channel != guild.afk_channel)
-    was_in_channel = (old_channel and old_channel != guild.afk_channel)
     message = None
-    if now_in_channel:
-        if was_in_channel:
-            message = f'{member.display_name} {get_synonym("moved to")} {new_channel.name}.'
-        else:
-            message = f'{get_synonym("Hello")} {member.display_name}!'
-    elif was_in_channel:
-        message = f'{get_synonym("Goodbye")} {member.display_name}!'
+    lang = None
+    if new_channel == voice_client.channel:
+        lang, hello = get_synonym('Hello')
+        message = f'{hello} {member.display_name}!'
+    elif old_channel == voice_client.channel:
+        lang, goodbye = get_synonym('Goodbye')
+        message = f'{goodbye} {member.display_name}!'
 
     # Send the text-to-speech message, or queue it if the bot is already speaking.
     if message and voice_client:
