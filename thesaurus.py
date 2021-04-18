@@ -28,7 +28,7 @@ _words = {
         ('fr-FR', 'Au Revoir'),
         ('pt-PT', 'Até logo'),
         ('de-DE', 'Auf Wiedersehen'),
-        ('jp-JP', 'Sayōnara'),
+        ('ja-JP', 'Sayōnara'),
         ('ru-RU', 'Do svidaniya'),
         ('ko-KR', 'Annyeong'),
         (None, 'Slan'),#Irish
