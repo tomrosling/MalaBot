@@ -46,7 +46,11 @@ async def update_bot_channel(guild):
             if voice_client.channel != channel_to_join:
                 await voice_client.move_to(channel_to_join)
         else:
+            # NOTE: VoiceChannel.connect() seems to be the only way to create a VoiceClient,
+            # but we need to pass the same channel again to Guild.change_voice_state() to self-deafen,
+            # otherwise we'll be disconnected.            
             voice_client = await channel_to_join.connect()
+            await guild.change_voice_state(channel=channel_to_join, self_deaf=True)
     elif voice_client:
         # Leave voice if there's nobody left on the server.
         await voice_client.disconnect()
