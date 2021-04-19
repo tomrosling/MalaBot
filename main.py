@@ -13,10 +13,15 @@ message_queue = []
 
 
 def after_play_finished(err):
+    global message_queue
+
     # If another message has been queued, play it.
-    if message_queue:
-        msg = message_queue.pop(0)
-        voice_client.play(msg, after=after_play_finished)
+    if voice_client:
+        if message_queue:
+            msg = message_queue.pop(0)
+            voice_client.play(msg, after=after_play_finished)
+    else:
+        message_queue = []
 
 
 async def update_bot_channel(guild):
