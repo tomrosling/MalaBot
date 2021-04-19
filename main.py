@@ -88,6 +88,9 @@ async def on_voice_state_update(member, old_state, new_state):
         lang, goodbye = get_synonym('Goodbye')
         message = f'{goodbye} {member.display_name}!'
 
+    if member.display_name == 'James':
+        message = message + ' we were so worried!'
+
     # Send the text-to-speech message, or queue it if the bot is already speaking.
     if message and voice_client:
         audio_stream = discord.PCMAudio(BytesIO(text_to_pcm(message)))
