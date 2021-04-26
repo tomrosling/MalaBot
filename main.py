@@ -15,7 +15,7 @@ message_queue = []
 def after_play_finished(err):
     global message_queue
 
-    # If another message has been queued, play it.
+    # If another message has been queued, play it, else clear the queue.
     if voice_client:
         if message_queue:
             msg = message_queue.pop(0)
@@ -44,7 +44,7 @@ async def update_bot_channel(guild):
             return 0
 
     # Find the channel with the most non-bot members and try to join it.
-    max_idx = max(range(len(all_channels)), key=lambda i: get_num_members(i))
+    max_idx = max(range(len(all_channels)), key=get_num_members)
     if get_num_members(max_idx) > 0:
         channel_to_join = all_channels[max_idx]
         if voice_client:
@@ -70,8 +70,8 @@ async def on_ready():
 
 @client.event
 async def on_voice_state_update(member, old_state, new_state):
-    # Don't send messages about ourself or any other bots!
-    if member.bot:
+    # Don't send messages about ourself!
+    if member.id == client.user.id:
         return
 
     # Has the user moved channel?
@@ -87,7 +87,7 @@ async def on_voice_state_update(member, old_state, new_state):
     if not voice_client:
         return
 
-    # Build a message based on the change. Treat 'afk' channel as if user disconnected.
+    # Build a message based on the change.
     message = None
     lang = None
     if new_channel == voice_client.channel:
