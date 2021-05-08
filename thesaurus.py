@@ -9,7 +9,7 @@ _words = {
         ('en-GB', 'ran away to')
     ],
     'Hello': [
-        ('en-GB', 'Hello'),
+        #('en-GB', 'Hello'),
         ('fr-FR', 'Bonjour'),
         ('es-ES', 'Hola'),
         ('ru-RU', 'Zdravstvuyte'),
@@ -19,10 +19,12 @@ _words = {
         ('de-DE', 'Guten Tag'),
         ('pt-PT', 'Olá'),
         ('nl-NL', 'Goedendag'),
-        ('ko-KR', 'Annyeong')
+        ('ko-KR', 'Annyeong'),
+        ('sv-SE', 'Hej'),
+        ('fi-FI', 'Moi'),
     ],
     'Goodbye': [
-        ('en-GB', 'Goodbye'),
+        #('en-GB', 'Goodbye'),
         ('es-ES', 'Adios'),
         ('it-IT', 'Arrivederci'),
         ('fr-FR', 'Au Revoir'),
@@ -31,9 +33,11 @@ _words = {
         ('ja-JP', 'Sayōnara'),
         ('ru-RU', 'Do svidaniya'),
         ('ko-KR', 'Annyeong'),
-        (None, 'Slan'),#Irish
+        #(None, 'Slan'),#Irish
         ('nl-NL', 'Tot ziens'),
-        ('zh-CN', 'Zàijiàn')
+        ('zh-CN', 'Zàijiàn'),
+        ('sv-SE', 'Adjö'),
+        ('fi-FI', 'Hyvästi'),
     ]
 }
 

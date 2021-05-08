@@ -12,10 +12,12 @@ audio_config = texttospeech.AudioConfig(
 
 def text_to_pcm(input, lang):
     lang = lang or 'en-GB'
-    if lang == 'en-GB':
-        voice_name = 'en-GB-Wavenet-F'
-    else:
-        voice_name = lang + '-Wavenet-A'
+
+    overrides = { 
+        'en-GB': 'en-GB-Wavenet-F',
+        'de-DE': 'de-DE-Wavenet-F'
+    }
+    voice_name = overrides.get(lang) or lang + '-Wavenet-A'
 
     voice = texttospeech.VoiceSelectionParams(language_code=lang,
                                               name=voice_name)
