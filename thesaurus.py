@@ -10,6 +10,7 @@ _words = {
     ],
     'Hello': [
         #('en-GB', 'Hello'),
+        ('en-chris', 'Hello'),
         ('fr-FR', 'Bonjour'),
         ('es-ES', 'Hola'),
         ('ru-RU', 'Zdravstvuyte'),
