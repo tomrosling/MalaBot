@@ -1,6 +1,7 @@
 import os
 import discord
 from dotenv import load_dotenv
+from functools import partial
 from thesaurus import get_synonym
 from tts import text_to_pcm
 from io import BytesIO
@@ -8,24 +9,23 @@ from io import BytesIO
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 client = discord.Client()
-voice_client = None
 message_queue = []
 
 
-def after_play_finished(err):
+def after_play_finished(guild, err):
     global message_queue
 
     # If another message has been queued, play it, else clear the queue.
-    if voice_client:
+    if guild.voice_client:
         if message_queue:
             msg = message_queue.pop(0)
-            voice_client.play(msg, after=after_play_finished)
+            guild.voice_client.play(msg, after=partial(after_play_finished, guild))
     else:
         message_queue = []
 
 
 async def update_bot_channel(guild):
-    global voice_client
+    voice_client = guild.voice_client
 
     all_channels = await guild.fetch_channels()
     if not all_channels:
@@ -49,17 +49,22 @@ async def update_bot_channel(guild):
         channel_to_join = all_channels[max_idx]
         if voice_client:
             if voice_client.channel != channel_to_join:
-                await voice_client.move_to(channel_to_join)
+                # move_to causes the bot to get stuck not playing any audio if the bot is 
+                # moved by a server admin, so just disconnect and reconnect...
+                # Possibly some internal state in discord.py but I have no idea how to flush/fix it.
+                #await voice_client.move_to(channel_to_join)
+                await voice_client.disconnect()
+                await channel_to_join.connect()
+                await guild.change_voice_state(channel=channel_to_join, self_deaf=True)
         else:
             # NOTE: VoiceChannel.connect() seems to be the only way to create a VoiceClient,
             # but we need to pass the same channel again to Guild.change_voice_state() to self-deafen,
-            # otherwise we'll be disconnected.            
-            voice_client = await channel_to_join.connect()
+            # otherwise we'll be disconnected.
+            await channel_to_join.connect()
             await guild.change_voice_state(channel=channel_to_join, self_deaf=True)
     elif voice_client:
         # Leave voice if there's nobody left on the server.
         await voice_client.disconnect()
-        voice_client = None
 
 
 
@@ -84,8 +89,10 @@ async def on_voice_state_update(member, old_state, new_state):
     guild = (old_channel and old_channel.guild) or (new_channel and new_channel.guild)
     assert(guild)
     await update_bot_channel(guild)
-    if not voice_client:
+    if not guild.voice_client:
         return
+    
+    voice_client = guild.voice_client
 
     # Build a message based on the change.
     message = None
@@ -105,7 +112,7 @@ async def on_voice_state_update(member, old_state, new_state):
         if voice_client.is_playing():
             message_queue.append(audio_stream)
         else:
-            voice_client.play(audio_stream, after=after_play_finished)
+            voice_client.play(audio_stream, after=partial(after_play_finished, guild))
 
 
 client.run(TOKEN)
