@@ -98,12 +98,12 @@ async def on_voice_state_update(member, old_state, new_state):
     message = None
     lang = None
     if new_channel == voice_client.channel:
-        lang, hello = get_synonym('Hello')
+        lang, hello = get_synonym('Hello', member.id)
         message = f'{hello} {member.display_name}!'
         if member.display_name == 'James':
             message = message + ' we were so worried!'
     elif old_channel == voice_client.channel:
-        lang, goodbye = get_synonym('Goodbye')
+        lang, goodbye = get_synonym('Goodbye', member.id)
         message = f'{goodbye} {member.display_name}!'
 
     # Send the text-to-speech message, or queue it if the bot is already speaking.
