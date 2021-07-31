@@ -1,4 +1,5 @@
 import random
+import json
 
 _words = {
     'Hello': {
@@ -34,39 +35,40 @@ _words = {
     }
 }
 
-_user_weights = {
-    151776854435430400: [ # Mala
-        ('en-chris', 0.3),
-        ('fr-FR', 0.3),
-    ],
-    143476957122658306: [ # James
-        ('en-chris', 0.5),
-        ('ko-KR', 0.25),
-    ],
-    93408269434884096: [ # Zoetrope
-        ('en-chris', 1),
-    ],
-    148237285190533120: [ # Sarah
-        ('en-chris', 0.6),
-    ],
-    135476235831607296: [ # Grumpy Cookie
-        ('en-chris', 0.25),
-        ('it-IT', 0.2),
-        ('ko-KR', 0.2),
-    ],
-}
 
 _default_weights = [
     ('en-chris', 0.5)
 ]
 
 
-def get_synonym(word, user_id):
+# Load user weights from a given file as a JSON object.
+# This will all be stored as strings, and the format is:
+#
+# {
+#   "display_name": [
+#     ["lang", "weight"],
+#     ...
+#   ],
+#   ...
+# }
+#
+def load_weights(filename):
+    try:
+        with open(filename, 'r') as f:
+            user_weights = json.load(f)
+            # TODO: check format is legit
+            return user_weights
+    except Exception as e:
+        print(f'Failed to load user RNG weights from \'{filename}\': {e}')
+
+_user_weights = load_weights('config/user_weights.json')
+
+def get_synonym(word, user_display_name):
     options = _words[word]
 
-    def pick_language(word, user_id):
-        weights = _user_weights.get(user_id) or _default_weights
-        assert(sum(map(lambda pair: pair[1], weights)) <= 1)
+    def pick_language(word, user_display_name):
+        weights = _user_weights.get(user_display_name) or _default_weights
+        assert(sum(map(lambda pair: float(pair[1]), weights)) <= 1)
         r = random.random()
         accumulator = 0
         for pair in weights:
@@ -77,7 +79,7 @@ def get_synonym(word, user_id):
                 continue
 
             # Accumulate probabilities and check RNG against this language.
-            accumulator += pair[1]
+            accumulator += float(pair[1])
             if r < accumulator:
                 return lang
         
@@ -89,5 +91,5 @@ def get_synonym(word, user_id):
         index = int(r * len(filtered_options))
         return filtered_options[index]
 
-    lang = pick_language(word, user_id)
+    lang = pick_language(word, user_display_name)
     return lang, options[lang]

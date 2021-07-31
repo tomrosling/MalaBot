@@ -153,5 +153,6 @@ $RECYCLE.BIN/
 # Local Python env
 __pycache__/
 
-# Custom audio files
+# Custom audio/config files
 audio/
+config/
