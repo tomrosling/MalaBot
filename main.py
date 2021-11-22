@@ -101,7 +101,7 @@ async def on_voice_state_update(member, old_state, new_state):
         lang, hello = get_synonym('Hello', member.display_name)
         message = f'{hello} {member.display_name}!'
         if member.display_name == 'James':
-            message = message + ' we were so worried!'
+            message = message + ' I was so worried!'
     elif old_channel == voice_client.channel:
         lang, goodbye = get_synonym('Goodbye', member.display_name)
         message = f'{goodbye} {member.display_name}!'
