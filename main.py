@@ -107,8 +107,10 @@ async def on_voice_state_update(member, old_state, new_state):
         message = f'{goodbye} {member.display_name}!'
 
     # Send the text-to-speech message, or queue it if the bot is already speaking.
-    if message and voice_client:
-        audio_stream = discord.PCMAudio(BytesIO(text_to_pcm(message)))
+    if message:
+        stream = BytesIO(text_to_pcm(message, lang))
+        stream.seek(64) # Hack: skip the first couple of frames to fix an audible pop...
+        audio_stream = discord.PCMAudio(stream)
         if voice_client.is_playing():
             message_queue.append(audio_stream)
         else:
