@@ -60,6 +60,7 @@ def load_weights(filename):
             return user_weights
     except Exception as e:
         print(f'Failed to load user RNG weights from \'{filename}\': {e}')
+        return {}
 
 _user_weights = load_weights('config/user_weights.json')
 
