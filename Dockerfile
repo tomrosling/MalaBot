@@ -12,6 +12,7 @@ COPY . ./
 
 # Install production dependencies.
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip setuptools wheel poetry
+RUN poetry install --no-dev --no-root
 
-CMD exec python main.py
+CMD exec poetry run python main.py
