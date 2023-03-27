@@ -8,7 +8,13 @@ from io import BytesIO
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
-client = discord.Client()
+
+# Set up intents and create client
+intents = discord.Intents.none()
+intents.guilds = True
+intents.voice_states = True
+client = discord.Client(intents=intents)
+
 message_queue = []
 
 
